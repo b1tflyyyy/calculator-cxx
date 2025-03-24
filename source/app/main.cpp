@@ -23,11 +23,20 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include <logger.hpp>
+
 int main(int argc, char** argv)
 {
+    UT_CC_DEFAULT_LOGGER_INIT();
+    
+    UT_CC_DEFAULT_LOGGER_INFO(__PRETTY_FUNCTION__);
+    UT_CC_DEFAULT_LOGGER_INFO("---- Initializing application ...");
+
     QGuiApplication gui_application{ argc, argv };
     QQmlApplicationEngine application_engine{};
 
+    UT_CC_DEFAULT_LOGGER_INFO("---- Application engine loading MainWindow.qml ...");
+    
     const QUrl url{ QStringLiteral("qrc:/main-window/MainWindow.qml") };
     application_engine.load(url);
 
