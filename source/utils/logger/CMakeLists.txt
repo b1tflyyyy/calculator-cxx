@@ -22,5 +22,15 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-add_subdirectory(app)
-add_subdirectory(utils)
+set(LIB_NAME logger_lib)
+
+set(SOURCES logger.cpp)
+set(HEADERS logger.hpp)
+
+add_library(${LIB_NAME} STATIC ${SOURCES} ${HEADERS})
+
+target_link_libraries(${LIB_NAME} PUBLIC 
+    spdlog_header_only
+)
+
+target_include_directories(${LIB_NAME} PUBLIC ./)
