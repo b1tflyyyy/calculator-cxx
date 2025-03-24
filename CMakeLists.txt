@@ -22,6 +22,8 @@
 
 cmake_minimum_required(VERSION 3.22)
 
+# Standard config
+# -----------------------------------------------------------------------
 project(calculator LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -38,5 +40,19 @@ set(CMAKE_AUTOUIC ON)
 
 add_compile_options(-Wall -Wextra)
 
+# Custom options
+# -----------------------------------------------------------------------
+option(ENABLE_LOGS "Enable debug logs" ON)
+
+if (ENABLE_LOGS)
+    add_compile_definitions(ENABLE_LOGS)
+endif()
+
+# Print custom options
+# -----------------------------------------------------------------------
+message(STATUS "Enable logs: ${ENABLE_LOGS}")
+
+# Sub dirs ...
+# -----------------------------------------------------------------------
 add_subdirectory(source)
 add_subdirectory(third-party)
