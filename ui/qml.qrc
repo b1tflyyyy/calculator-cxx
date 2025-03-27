@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix = "/">
         <file>main-window/MainWindow.qml</file>
+        <file>main-page/MainPage.qml</file>
+        <file>calc-keyboard/CalcKeyboard.qml</file>
+        <file>calc-keyboard/calc-button/CalcButton.qml</file>
+        <file>calc-keyboard/calc-button/handlers/CalcButtonColorHandler.qml</file>
+        <file>calc-keyboard/model/CalcButtonModel.qml</file>
     </qresource>
 </RCC>
