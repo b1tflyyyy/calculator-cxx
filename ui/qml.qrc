@@ -6,5 +6,6 @@
         <file>calc-keyboard/calc-button/CalcButton.qml</file>
         <file>calc-keyboard/calc-button/handlers/CalcButtonColorHandler.qml</file>
         <file>calc-keyboard/model/CalcButtonModel.qml</file>
+        <file>calc-screen/CalcScreen.qml</file>
     </qresource>
 </RCC>
