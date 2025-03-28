@@ -34,6 +34,8 @@ GridLayout {
     property int buttonRadius: 20
     property int buttonTextSize: 20
 
+    signal buttonClicked(string button)
+
     columns: 4
     rows: 6
 
@@ -62,6 +64,7 @@ GridLayout {
 
             onCalcButtonClicked: function() {
                 // TODO: ...
+                buttonClicked(model.text)                
                 console.log(model.text)
             }
         }
