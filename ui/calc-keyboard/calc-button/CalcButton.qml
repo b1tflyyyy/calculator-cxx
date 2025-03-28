@@ -36,6 +36,12 @@ Rectangle {
 
     signal calcButtonClicked()
 
+    Behavior on color {
+        ColorAnimation {
+            duration: 100
+        }
+    }
+
     Text {
         id: _buttonText
 
