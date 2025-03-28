@@ -24,6 +24,7 @@ import QtQuick 2.15
 import QtQuick.Controls
 
 import "../calc-keyboard"
+import "../calc-screen"
 
 Rectangle {
     id: _mainPage
@@ -32,14 +33,34 @@ Rectangle {
         fill: parent 
     }
 
-    CalcKeyboard {
-        id: _keyboard
+    CalcScreen {
+        id: _calcScreen
 
         anchors {
-            bottom: parent.bottom
+            top: parent.top
+            left: parent.left
+        }
+
+        height: parent.height * 0.30
+        width: parent.width
+
+        color: "transparent"
+    
+        expressionTextSize: 48
+    }
+
+    CalcKeyboard {
+        id: _calcKeyboard
+
+        anchors {
+            top: _calcScreen.bottom
         }
 
         height: parent.height * 0.70
         width: parent.width
+
+        onButtonClicked: function (value) {
+            _calcScreen.currentExpression += value
+        }
     }
 }
