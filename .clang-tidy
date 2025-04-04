@@ -1,0 +1,22 @@
+Checks: >
+  cppcoreguidelines-*,
+  performance-*,
+  readability-*,
+  bugprone-*,
+  misc-*,
+  clang-analyzer-*,
+  clang-diagnostic-*,
+  -cppcoreguidelines-pro-type-vararg,
+  -cppcoreguidelines-owning-memory
+
+CheckOptions:
+  - key: modernize-use-auto.MinTypeNameLength
+    value: '5'
+  - key: clang-analyzer-core.CallAndMessage
+    value: true
+  - key: clang-analyzer-cplusplus.NewDelete
+    value: true
+  - key: clang-analyzer-deadcode.DeadStores
+    value: true
+  - key: clang-analyzer-security.FloatLoopCounter
+    value: true
