@@ -26,6 +26,7 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/fmt/bundled/color.h>
 
 namespace Utils 
 {
