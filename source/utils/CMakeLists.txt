@@ -23,3 +23,5 @@
 cmake_minimum_required(VERSION 3.22)
 
 add_subdirectory(logger)
+add_subdirectory(finite-state-machine)
+add_subdirectory(custom-predicates)
