@@ -20,6 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/*
+    The ConditionalAwaiter class checks availability of character from InputGenerator.
+    If the InputGenerator have no character, we move to TState::End, otherwise the TTransitionFunction is used.
+*/
+
 #pragma once
 
 #include <utility>

@@ -20,6 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/*
+    The UnconditionalAwaiter class doesn't check availability of character from InputGenerator.
+    Just moves to the specified state.
+*/
+
 #pragma once 
 
 #include <utility>
