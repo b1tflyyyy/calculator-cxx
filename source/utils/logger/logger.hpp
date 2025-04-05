@@ -33,6 +33,9 @@ namespace Utils
     class Logger
     {
     public:
+        using Emp = ::fmt::emphasis;
+        using Tc = ::fmt::terminal_color;
+
         Logger() = default;
         ~Logger() noexcept = default;
 
@@ -50,10 +53,45 @@ namespace Utils
     #define UT_CC_DEFAULT_LOGGER_WARN(...)      ::Utils::Logger::GetDefaultLogger()->warn(__VA_ARGS__)
     #define UT_CC_DEFAULT_LOGGER_CRITICAL(...)  ::Utils::Logger::GetDefaultLogger()->critical(__VA_ARGS__)
     #define UT_CC_DEFAULT_LOGGER_INFO(...)      ::Utils::Logger::GetDefaultLogger()->info(__VA_ARGS__)
+
+    #define UT_CC_DEFAULT_LOGGER_COLOR_ERROR(background_color, foreground_color, text_style, ...) \
+    ::Utils::Logger::GetDefaultLogger()->error(fmt::format(\
+        ::fmt::bg(background_color) |                      \
+        ::fmt::fg(foreground_color) |                      \
+        ::fmt::emphasis(text_style),                       \
+        __VA_ARGS__                                        \
+    ))
+    #define UT_CC_DEFAULT_LOGGER_COLOR_WARN(background_color, foreground_color, text_style, ...) \
+    ::Utils::Logger::GetDefaultLogger()->warn(fmt::format(\
+        ::fmt::bg(background_color) |                     \
+        ::fmt::fg(foreground_color) |                     \
+        ::fmt::emphasis(text_style),                      \
+        __VA_ARGS__                                       \
+    ))
+
+    #define UT_CC_DEFAULT_LOGGER_COLOR_CRITICAL(background_color, foreground_color, text_style, ...) \
+    ::Utils::Logger::GetDefaultLogger()->critical(fmt::format(\
+        ::fmt::bg(background_color) |                         \
+        ::fmt::fg(foreground_color) |                         \
+        ::fmt::emphasis(text_style),                          \
+        __VA_ARGS__                                           \
+    ))
+
+    #define UT_CC_DEFAULT_LOGGER_COLOR_INFO(background_color, foreground_color, text_style, ...) \
+    ::Utils::Logger::GetDefaultLogger()->info(fmt::format(\
+        ::fmt::bg(background_color) |                     \
+        ::fmt::fg(foreground_color) |                     \
+        ::fmt::emphasis(text_style),                      \
+        __VA_ARGS__                                       \
+    ))
 #else 
     #define UT_CC_DEFAULT_LOGGER_INIT()         
     #define UT_CC_DEFAULT_LOGGER_ERROR(...)     
     #define UT_CC_DEFAULT_LOGGER_WARN(...)      
     #define UT_CC_DEFAULT_LOGGER_CRITICAL(...)  
     #define UT_CC_DEFAULT_LOGGER_INFO(...)      
+    #define UT_CC_DEFAULT_LOGGER_COLOR_ERROR(...)
+    #define UT_CC_DEFAULT_LOGGER_COLOR_WARN(...)
+    #define UT_CC_DEFAULT_LOGGER_COLOR_CRITICAL(...)
+    #define UT_CC_DEFAULT_LOGGER_COLOR_INFO(...)
 #endif
