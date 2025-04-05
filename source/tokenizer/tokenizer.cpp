@@ -364,7 +364,10 @@ Utils::ResumableNoEncapsulation Tokenizer::Operator(FiniteStateMachine& finite_s
 
 Utils::ResumableNoEncapsulation Tokenizer::Error([[maybe_unused]] FiniteStateMachine& finite_state_machine)
 {
-    UT_CC_DEFAULT_LOGGER_WARN("Tokenization error: {}", mErrorMessage.toStdString());
+    UT_CC_DEFAULT_LOGGER_INFO(__PRETTY_FUNCTION__);
+    UT_CC_DEFAULT_LOGGER_COLOR_WARN(Tc::black, Tc::yellow, Emp::bold, 
+        "Tokenization error: {}", mErrorMessage.toStdString()
+    );
 
     mErrorFlag = true;
     co_return;

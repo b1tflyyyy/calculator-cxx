@@ -27,6 +27,9 @@
 #include <array>
 #include <string>
 
+using Tc = Utils::Logger::Tc;
+using Emp = Utils::Logger::Emp;
+
 class TokenizerTest : public ::testing::Test
 {
 protected:
@@ -195,12 +198,9 @@ TEST_F(TokenizerTest, HandlesEmptyInput)
     mTokenizer.Init(QStringLiteral(""));
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -211,12 +211,9 @@ TEST_F(TokenizerTest, HandlesOnlySpaces)
     mTokenizer.Init("   ");
     mTokenizer.Run(); 
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -227,12 +224,9 @@ TEST_F(TokenizerTest, TokenizeExpressionWithInvalidCharacter)
     mTokenizer.Init("2+3$5"); 
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -243,12 +237,9 @@ TEST_F(TokenizerTest, TokenizeExpressionWithMultipleDots)
     mTokenizer.Init("3..14+2");
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -259,12 +250,9 @@ TEST_F(TokenizerTest, TokenizeExpressionWithConsecutiveOperators)
     mTokenizer.Init("5++3"); 
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -275,12 +263,9 @@ TEST_F(TokenizerTest, TokenizeExpressionWithInvalidFloat)
     mTokenizer.Init("1.2.3+4"); 
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());
@@ -291,12 +276,9 @@ TEST_F(TokenizerTest, TokenizeExpressionWithLetter)
     mTokenizer.Init("5+a");
     mTokenizer.Run();
 
-    UT_CC_DEFAULT_LOGGER_INFO(fmt::format(
-        fmt::bg(fmt::terminal_color::black) |
-        fmt::fg(fmt::terminal_color::green) |
-        fmt::emphasis::bold,
+    UT_CC_DEFAULT_LOGGER_COLOR_INFO(Tc::black,Tc::green, Emp::bold,
         "Warning expected, OK"
-    ));
+    );
 
     ASSERT_TRUE(mTokenizer.HasError());
     ASSERT_FALSE(mTokenizer.GetErrorMessage().isEmpty());

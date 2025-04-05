@@ -35,6 +35,9 @@
 
 class Tokenizer
 {
+    using Tc = Utils::Logger::Tc;
+    using Emp = Utils::Logger::Emp;
+
 public:
     enum class State : std::int16_t
     {
