@@ -30,4 +30,5 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${QML_SOURCES})
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     qt6_lib
     logger_lib
+    qml_hash_map_lib
 )

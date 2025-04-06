@@ -20,28 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include "qml-hash-map.hpp"
 
-#include <logger.hpp>
-#include <qml-hash-map.hpp>
-
-int main(int argc, char** argv)
+namespace Utils
 {
-    UT_CC_DEFAULT_LOGGER_INIT();
-    
-    UT_CC_DEFAULT_LOGGER_INFO(__PRETTY_FUNCTION__);
-    UT_CC_DEFAULT_LOGGER_INFO("---- Initializing application ...");
+    QmlHashMap::QmlHashMap(QObject* parent) :
+        QObject{ parent }, mQMap{}
+    { }
 
-    QGuiApplication gui_application{ argc, argv };
-    QQmlApplicationEngine application_engine{};
+    void QmlHashMap::Insert(const QString& key, QObject* object)
+    {
+        mQMap.insert(key, object);
+    }
 
-    qmlRegisterType<Utils::QmlHashMap>("QmlHashMap", 1, 0, "HashMap");
-    
-    UT_CC_DEFAULT_LOGGER_INFO("---- Application engine loading MainWindow.qml ...");
-    
-    const QUrl url{ QStringLiteral("qrc:/main-window/MainWindow.qml") };
-    application_engine.load(url);
-
-    return QGuiApplication::exec();
+    QObject* QmlHashMap::Get(const QString& key)
+    {
+        return mQMap[key];
+    }
 }

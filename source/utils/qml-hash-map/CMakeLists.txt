@@ -22,7 +22,15 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-add_subdirectory(logger)
-add_subdirectory(finite-state-machine)
-add_subdirectory(custom-predicates)
-add_subdirectory(qml-hash-map)
+set(LIB_NAME qml_hash_map_lib)
+
+set(SOURCES qml-hash-map.cpp)
+set(HEADERS qml-hash-map.hpp)
+
+add_library(${LIB_NAME} STATIC ${SOURCES} ${HEADERS})
+
+target_link_libraries(${LIB_NAME} PUBLIC 
+    qt6_lib
+)
+
+target_include_directories(${LIB_NAME} PUBLIC ./)
