@@ -59,8 +59,23 @@ Rectangle {
         height: parent.height * 0.70
         width: parent.width
 
-        onButtonClicked: function (value) {
-            _calcScreen.currentExpression += value
+        onButtonClicked: function (name, value) {
+            if (name === "all_clear") {
+                if (_calcScreen.currentExpression !== "") {
+                    _calcScreen.currentExpression = _calcScreen.currentExpression.slice(0, -1)
+                } else {
+                    _calcScreen.currentExpression = ""
+                }
+            } else {
+                _calcScreen.currentExpression += value
+            }
+        }
+    }
+
+    Connections {
+        target: _calcScreen
+        function onExpressionChanged(isEmpty: bool) {
+            _calcKeyboard.showAllClear(isEmpty);
         }
     }
 }
