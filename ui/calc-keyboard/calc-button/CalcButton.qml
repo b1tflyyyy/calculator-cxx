@@ -29,31 +29,80 @@ Rectangle {
     property string buttonText: ""
     property int buttonTextSize: 10
 
+    property bool isIcon: false
+    property string iconPath: ""
+
     // signature of handler -> function(containsMouse) { return "color" }
     property var colorHandler: null
 
-    color: colorHandler(_buttonMouseArea.containsMouse)
-
     signal calcButtonClicked()
 
+    function dynamicPointSize() {
+        if (_buttonContainer.width <= 0 || _buttonContainer.height <= 0) {
+            return _buttonContainer.buttonTextSize;
+        }
+
+        return Math.min(_buttonContainer.width, _buttonContainer.height) * 0.3
+    }
+
+    color: colorHandler(_buttonMouseArea.containsMouse)
+    
     Behavior on color {
         ColorAnimation {
             duration: 100
         }
     }
 
-    Text {
-        id: _buttonText
+    Loader {
+        id: _loader
 
         anchors {
-            centerIn: parent
+            centerIn: _buttonContainer 
         }
 
-        font {
-            pointSize: buttonTextSize
-        }
+        sourceComponent: isIcon ? _iconComponent : _textComponent
+    }
 
-        text: parent.buttonText
+    Component { 
+        id: _textComponent
+
+        Text {
+            id: _buttonText
+
+            font {
+                pointSize: dynamicPointSize()
+            }
+
+            OpacityAnimator on opacity {
+                from: 0
+                to: 1
+
+                duration: 300
+            }
+
+            text: _buttonContainer.buttonText
+        }
+    }
+
+    Component {
+        id: _iconComponent 
+
+        Image {
+            id: _icon
+
+            OpacityAnimator on opacity {
+                from: 0
+                to: 1
+
+                duration: 300
+            }
+
+            height: _buttonContainer.height * 0.50
+            width: _buttonContainer.width * 0.50
+
+            fillMode: Image.PreserveAspectFit
+            source: _buttonContainer.iconPath
+        }
     }
 
     MouseArea {
