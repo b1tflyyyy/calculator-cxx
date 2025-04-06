@@ -29,6 +29,8 @@ Rectangle {
     property string currentExpression: ""
     property int expressionTextSize: 10
 
+    signal expressionChanged(isEmpty: bool)
+
     Flickable {
         id: _flick
 
@@ -42,6 +44,7 @@ Rectangle {
         contentHeight: _expressionText.height
         contentWidth: _expressionText.width
 
+        // TODO: fix animation
         Behavior on contentX {
             NumberAnimation {
                 duration: 100
@@ -69,6 +72,9 @@ Rectangle {
             }
 
             text: currentExpression
+            onTextChanged: function () {
+                expressionChanged(_expressionText.text === "")
+            }
         }
 
         Connections {
