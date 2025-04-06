@@ -28,13 +28,15 @@ import "model"
 import "calc-button"
 import "calc-button/handlers"
 
+import QmlHashMap 1.0
+
 GridLayout {
     id: _grid
 
     property int buttonRadius: 20
     property int buttonTextSize: 20
 
-    signal buttonClicked(string button)
+    signal buttonClicked(name: string, value: string)
 
     columns: 4
     rows: 6
@@ -46,10 +48,16 @@ GridLayout {
         id: _calcButtonColorHandler
     }
 
+    HashMap {
+        id: _buttonHashMap
+    }
+
     Repeater {
         model: CalcButtonModel{}
 
         CalcButton {
+            id: _button
+
             Layout.fillWidth: true
             Layout.fillHeight: true  
 
@@ -59,14 +67,25 @@ GridLayout {
             colorHandler: _calcButtonColorHandler[model.colorHandlerID]
             radius: _grid.buttonRadius
 
-            buttonText: model.text
+            buttonText: model.value
             buttonTextSize: _grid.buttonTextSize
 
+            isIcon: false
+            iconPath: model.iconPath
+
             onCalcButtonClicked: function() {
-                // TODO: ...
-                buttonClicked(model.text)                
-                console.log(model.text)
+                buttonClicked(model.name, model.value)                
+            }
+
+            Component.onCompleted: function() {
+                _buttonHashMap.Insert(model.name, this)
             }
         }
+    }
+
+    // TODO: bad naming
+    function showAllClear(show: bool) {
+        let button = _buttonHashMap.Get("all_clear")
+        button.isIcon = !show
     }
 }
