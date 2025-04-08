@@ -29,6 +29,7 @@ Rectangle {
     property string currentExpression: ""
     property int expressionTextSize: 10
 
+    // TODO: refactor
     signal expressionChanged(isEmpty: bool)
 
     Flickable {
@@ -41,10 +42,6 @@ Rectangle {
 
         interactive: true
 
-        contentHeight: _expressionText.height
-        contentWidth: _expressionText.width
-
-        // TODO: fix animation
         Behavior on contentX {
             NumberAnimation {
                 duration: 100
@@ -52,11 +49,18 @@ Rectangle {
         }
 
         function autoHorizontalScroll() {
-            if (_flick.contentWidth < _flick.width) {
+            if (_expressionTextMetrics.advanceWidth <= _flick.width) {
                 _flick.contentX = 0
             } else {
-                _flick.contentX = _flick.contentWidth - _flick.width
+                _flick.contentX = (_expressionTextMetrics.advanceWidth - _flick.width)     
             }
+        }
+
+        TextMetrics {
+            id: _expressionTextMetrics
+
+            font: _expressionText.font
+            text: _expressionText.text
         }
 
         Text {
