@@ -47,6 +47,10 @@ Rectangle {
         color: "transparent"
     
         expressionTextSize: 48
+
+        onExpressionChanged: function (expression) {
+            _calcKeyboard.showAllClear(expression === "") // show AC if expression is empty
+        }
     }
 
     CalcKeyboard {
@@ -62,20 +66,13 @@ Rectangle {
         onButtonClicked: function (name, value) {
             if (name === "all_clear") {
                 if (_calcScreen.currentExpression !== "") {
-                    _calcScreen.currentExpression = _calcScreen.currentExpression.slice(0, -1)
+                    _calcScreen.deleteLastCharacter()
                 } else {
                     _calcScreen.currentExpression = ""
                 }
             } else {
-                _calcScreen.currentExpression += value
+                _calcScreen.addCharacter(value)
             }
-        }
-    }
-
-    Connections {
-        target: _calcScreen
-        function onExpressionChanged(isEmpty: bool) {
-            _calcKeyboard.showAllClear(isEmpty);
         }
     }
 }
