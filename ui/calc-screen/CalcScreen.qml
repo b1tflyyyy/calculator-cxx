@@ -29,11 +29,40 @@ Rectangle {
     property string currentExpression: ""
     property int expressionTextSize: 10
 
-    // TODO: refactor
-    signal expressionChanged(isEmpty: bool)
+    signal expressionChanged(expression: string)
+
+    function deleteLastCharacter() {
+        let trimmedText = currentExpression.slice(0, -1)
+        _textMetrics.text = trimmedText
+
+        if (_textMetrics.advanceWidth > _flick.width) {
+            _deletingCharacterAnimation.to = _textMetrics.advanceWidth - _flick.width 
+            _deletingCharacterAnimation.start()
+        } else {
+            currentExpression = trimmedText // delete the last character without animation
+        }
+    }
+
+    function addCharacter(character: string) {
+        currentExpression += character
+        
+        if (_flick.contentWidth > _flick.width) {
+            _addingCharacterAnimation.to = _flick.contentWidth - _flick.width 
+            _addingCharacterAnimation.start()
+        }
+    }
+
+    TextMetrics {
+        id: _textMetrics
+
+        font: _expressionText.font
+        text: ""
+    }
 
     Flickable {
         id: _flick
+
+        property int animationDuration: 100
 
         width: parent.width
         height: parent.height
@@ -42,30 +71,29 @@ Rectangle {
 
         interactive: true
 
-        Behavior on contentX {
-            NumberAnimation {
-                duration: 100
-            }
+        contentWidth: _expressionText.width
+        contentHeight: _expressionText.height
+
+        PropertyAnimation {
+            id: _addingCharacterAnimation
+            target: _flick  
+            property: "contentX"
+            duration: _flick.animationDuration
         }
 
-        function autoHorizontalScroll() {
-            if (_expressionTextMetrics.advanceWidth <= _flick.width) {
-                _flick.contentX = 0
-            } else {
-                _flick.contentX = (_expressionTextMetrics.advanceWidth - _flick.width)     
+        PropertyAnimation {
+            id: _deletingCharacterAnimation
+            target: _flick
+            property: "contentX"
+            duration: _flick.animationDuration
+            onStopped: function () { // remove the last character after animation
+                currentExpression = currentExpression.slice(0, -1)
             }
-        }
-
-        TextMetrics {
-            id: _expressionTextMetrics
-
-            font: _expressionText.font
-            text: _expressionText.text
         }
 
         Text {
             id: _expressionText
-
+            
             anchors {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
@@ -77,14 +105,7 @@ Rectangle {
 
             text: currentExpression
             onTextChanged: function () {
-                expressionChanged(_expressionText.text === "")
-            }
-        }
-
-        Connections {
-            target: _expressionText
-            function onTextChanged() {
-                _flick.autoHorizontalScroll()
+                expressionChanged(_expressionText.text)
             }
         }
     }
