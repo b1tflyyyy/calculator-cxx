@@ -38,35 +38,35 @@ ListModel {
     id: _calcButtonModel
 
     // 0 row
-    ListElement { name: "left_parenthesis";  value: "("; isIcon: false; iconPath: ""; row: 0; col: 2; colorHandlerID: "operatorButtonHandler"; }
-    ListElement { name: "right_parenthesis"; value: ")"; isIcon: false; iconPath: ""; row: 0; col: 3; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "left_parenthesis";  value: "("; showIcon: false; iconPath: ""; row: 0; col: 2; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "right_parenthesis"; value: ")"; showIcon: false; iconPath: ""; row: 0; col: 3; colorHandlerID: "operatorButtonHandler"; }
 
     // 1 row
-    ListElement { name: "all_clear"; value: "AC";  isIcon: false; iconPath: "qrc:/resources/delete.png"; row: 1; col: 1; colorHandlerID: "operatorButtonHandler"; }
-    ListElement { name: "sign";      value: "+,-"; isIcon: false; iconPath: "";                          row: 1; col: 2; colorHandlerID: "operatorButtonHandler"; }
-    ListElement { name: "division";  value: "/";   isIcon: false; iconPath: "";                          row: 1; col: 3; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "all_clear"; value: "AC";  showIcon: false; iconPath: "qrc:/resources/delete.png"; row: 1; col: 1; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "sign";      value: "+,-"; showIcon: false; iconPath: "";                          row: 1; col: 2; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "division";  value: "/";   showIcon: false; iconPath: "";                          row: 1; col: 3; colorHandlerID: "operatorButtonHandler"; }
 
     // 2 row
-    ListElement { name: "seven";          value: "7"; isIcon: false; iconPath: ""; row: 2; col: 0; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "eight";          value: "8"; isIcon: false; iconPath: ""; row: 2; col: 1; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "nine";           value: "9"; isIcon: false; iconPath: ""; row: 2; col: 2; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "multiplication"; value: "*"; isIcon: false; iconPath: ""; row: 2; col: 3; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "seven";          value: "7"; showIcon: false; iconPath: ""; row: 2; col: 0; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "eight";          value: "8"; showIcon: false; iconPath: ""; row: 2; col: 1; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "nine";           value: "9"; showIcon: false; iconPath: ""; row: 2; col: 2; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "multiplication"; value: "*"; showIcon: false; iconPath: ""; row: 2; col: 3; colorHandlerID: "operatorButtonHandler"; }
 
     // 3 row
-    ListElement { name: "four";        value: "4"; isIcon: false; iconPath: ""; row: 3; col: 0; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "five";        value: "5"; isIcon: false; iconPath: ""; row: 3; col: 1; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "six";         value: "6"; isIcon: false; iconPath: ""; row: 3; col: 2; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "subtraction"; value: "-"; isIcon: false; iconPath: ""; row: 3; col: 3; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "four";        value: "4"; showIcon: false; iconPath: ""; row: 3; col: 0; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "five";        value: "5"; showIcon: false; iconPath: ""; row: 3; col: 1; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "six";         value: "6"; showIcon: false; iconPath: ""; row: 3; col: 2; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "subtraction"; value: "-"; showIcon: false; iconPath: ""; row: 3; col: 3; colorHandlerID: "operatorButtonHandler"; }
 
     // 4 row
-    ListElement { name: "one";      value: "1"; isIcon: false; iconPath: ""; row: 4; col: 0; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "two";      value: "2"; isIcon: false; iconPath: ""; row: 4; col: 1; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "three";    value: "3"; isIcon: false; iconPath: ""; row: 4; col: 2; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "addition"; value: "+"; isIcon: false; iconPath: ""; row: 4; col: 3; colorHandlerID: "operatorButtonHandler"; }    
+    ListElement { name: "one";      value: "1"; showIcon: false; iconPath: ""; row: 4; col: 0; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "two";      value: "2"; showIcon: false; iconPath: ""; row: 4; col: 1; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "three";    value: "3"; showIcon: false; iconPath: ""; row: 4; col: 2; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "addition"; value: "+"; showIcon: false; iconPath: ""; row: 4; col: 3; colorHandlerID: "operatorButtonHandler"; }    
 
     // 5 row
-    ListElement { name: "zero";  value: "0"; isIcon: false; iconPath: ""; row: 5; col: 0; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "power"; value: "^"; isIcon: false; iconPath: ""; row: 5; col: 1; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "point"; value: "."; isIcon: false; iconPath: ""; row: 5; col: 2; colorHandlerID: "numericButtonHandler";  }
-    ListElement { name: "equal"; value: "="; isIcon: false; iconPath: ""; row: 5; col: 3; colorHandlerID: "operatorButtonHandler"; }
+    ListElement { name: "zero";  value: "0"; showIcon: false; iconPath: ""; row: 5; col: 0; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "power"; value: "^"; showIcon: false; iconPath: ""; row: 5; col: 1; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "point"; value: "."; showIcon: false; iconPath: ""; row: 5; col: 2; colorHandlerID: "numericButtonHandler";  }
+    ListElement { name: "equal"; value: "="; showIcon: false; iconPath: ""; row: 5; col: 3; colorHandlerID: "operatorButtonHandler"; }
 }

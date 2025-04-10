@@ -29,7 +29,7 @@ Rectangle {
     property string buttonText: ""
     property int buttonTextSize: 10
 
-    property bool isIcon: false
+    property bool showIcon: false
     property string iconPath: ""
 
     // signature of handler -> function(containsMouse) { return "color" }
@@ -60,7 +60,7 @@ Rectangle {
             centerIn: _buttonContainer 
         }
 
-        sourceComponent: isIcon ? _iconComponent : _textComponent
+        sourceComponent: showIcon ? _iconComponent : _textComponent
     }
 
     Component { 
