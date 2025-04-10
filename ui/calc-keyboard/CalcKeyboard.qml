@@ -70,7 +70,7 @@ GridLayout {
             buttonText: model.value
             buttonTextSize: _grid.buttonTextSize
 
-            isIcon: false
+            showIcon: false
             iconPath: model.iconPath
 
             onCalcButtonClicked: function() {
@@ -83,9 +83,8 @@ GridLayout {
         }
     }
 
-    // TODO: bad naming
-    function showAllClear(show: bool) {
+    function showAllClear(showIcon: bool) {
         let button = _buttonHashMap.Get("all_clear")
-        button.isIcon = !show
+        button.showIcon = !showIcon
     }
 }
