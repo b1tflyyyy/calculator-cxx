@@ -30,4 +30,10 @@ add_executable(${PROJECT_NAME} ${TESTS})
 add_compile_options(-Wall -Wextra -fsanitize=undefined)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/source)
-target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gtest tokenizer_lib rpn_converter_lib -fsanitize=undefined)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    GTest::gtest 
+    tokenizer_lib 
+    rpn_converter_lib
+    rpn-evaluator_lib 
+    -fsanitize=undefined
+)
