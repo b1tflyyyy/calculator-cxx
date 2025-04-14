@@ -22,8 +22,15 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-add_subdirectory(app)
-add_subdirectory(utils)
-add_subdirectory(tests)
-add_subdirectory(tokenizer)
-add_subdirectory(rpn-converter)
+set(LIB_NAME rpn_converter_lib)
+
+set(SOURCES rpn-converter.cpp)
+set(HEADERS rpn-converter.hpp)
+
+add_library(${LIB_NAME} STATIC ${SOURCES} ${HEADERS})
+
+target_link_libraries(${LIB_NAME} PUBLIC 
+    tokenizer_lib
+)
+
+target_include_directories(${LIB_NAME} PUBLIC ./)
