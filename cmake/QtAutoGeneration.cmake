@@ -20,16 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cmake_minimum_required(VERSION 3.22)
+function(enable_qt_autogen target)
+    set_target_properties(${target} PROPERTIES
+        AUTOMOC ON
+        AUTORCC ON
+        AUTOUIC ON
+    )
+endfunction()
 
-set(SOURCES main.cpp)
-set(QML_SOURCES ${CMAKE_SOURCE_DIR}/ui/qml.qrc)
-
-add_executable(${PROJECT_NAME} ${SOURCES} ${QML_SOURCES})
-enable_qt_autogen(${PROJECT_NAME})
-
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    qt6_lib
-    logger_lib
-    qml_hash_map_lib
-)
+function(disable_qt_autogen target)
+    set_target_properties(${target} PROPERTIES
+        AUTOMOC OFF
+        AUTORCC OFF
+        AUTOUIC OFF
+    )
+endfunction()

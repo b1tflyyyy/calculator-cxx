@@ -34,11 +34,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG bin/Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE bin/Release)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
 add_compile_options(-Wall -Wextra)
+
+# Add modules
+# -----------------------------------------------------------------------
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+# Include modules
+# -----------------------------------------------------------------------
+include(QtAutoGeneration)
 
 # Custom options
 # -----------------------------------------------------------------------

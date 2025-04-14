@@ -28,6 +28,7 @@ set(SOURCES qml-hash-map.cpp)
 set(HEADERS qml-hash-map.hpp)
 
 add_library(${LIB_NAME} STATIC ${SOURCES} ${HEADERS})
+enable_qt_autogen(${LIB_NAME})
 
 target_link_libraries(${LIB_NAME} PUBLIC 
     qt6_lib
