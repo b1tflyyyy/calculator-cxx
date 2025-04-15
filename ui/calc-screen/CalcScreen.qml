@@ -52,6 +52,41 @@ Rectangle {
         }
     }
 
+    function isDigit(character: string): bool {
+        return character >= "0" && character <= "9"
+    }
+
+    function changeSign() {
+        let i = currentExpression.length - 1
+        
+        // Get the starting position of the last number entered
+        // expression: 2 + 2
+        // idx:        0 1 2
+        // result:       1
+        while (i >= 0 && (isDigit(currentExpression[i]) || 
+                          currentExpression[i] === "."  || 
+                          currentExpression[i] === ")")) {
+            i--
+        }
+
+        
+        if (i === -1) { // if it is a positive number at the beginning
+            let expr = currentExpression.slice(0, currentExpression.length)
+            currentExpression = "(-" + expr + ")"
+        } else {
+            let expr = currentExpression.slice(i + 1, currentExpression.length) // whose expression sign is to be changed
+
+            // if it is negative
+            if (currentExpression.charAt(i) === "-" && currentExpression.charAt(i - 1) === "(") {
+                let forward_part = currentExpression.slice(0, i - 1)
+                currentExpression = forward_part + expr.slice(0, -1) // expr.slice(0, -1) remove extra right parenthesis at the end
+            } else { // if it is positive
+                let forward_part = currentExpression.slice(0, i + 1)
+                currentExpression = forward_part + "(-" + expr + ")"
+            }
+        }
+    }
+
     TextMetrics {
         id: _textMetrics
 

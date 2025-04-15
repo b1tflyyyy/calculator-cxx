@@ -70,6 +70,10 @@ Rectangle {
                 } else {
                     _calcScreen.currentExpression = ""
                 }
+            } else if (name === "sign") {
+                _calcScreen.changeSign()
+            } else if (name === "equal") {
+
             } else {
                 _calcScreen.addCharacter(value)
             }
