@@ -37,6 +37,7 @@ GridLayout {
     property int buttonTextSize: 20
 
     signal buttonClicked(name: string, value: string)
+    signal buttonPressAndHold(name: string, value: string)
 
     columns: 4
     rows: 6
@@ -75,6 +76,10 @@ GridLayout {
 
             onCalcButtonClicked: function() {
                 buttonClicked(model.name, model.value)                
+            }
+
+            onCalcButtonPressAndHold: function() {
+                buttonPressAndHold(model.name, model.value)
             }
 
             Component.onCompleted: function() {

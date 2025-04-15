@@ -73,9 +73,15 @@ Rectangle {
             } else if (name === "sign") {
                 _calcScreen.changeSign()
             } else if (name === "equal") {
-
+                // TODO: 
             } else {
                 _calcScreen.addCharacter(value)
+            }
+        }
+
+        onButtonPressAndHold: function (name, value) {
+            if (name === "all_clear") {
+                _calcScreen.currentExpression = ""
             }
         }
     }

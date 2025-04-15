@@ -36,6 +36,7 @@ Rectangle {
     property var colorHandler: null
 
     signal calcButtonClicked()
+    signal calcButtonPressAndHold()
 
     function dynamicPointSize() {
         if (_buttonContainer.width <= 0 || _buttonContainer.height <= 0) {
@@ -114,6 +115,10 @@ Rectangle {
 
         onClicked: function() {
             calcButtonClicked()
+        }
+
+        onPressAndHold: function() {
+            calcButtonPressAndHold()
         }
     }
 }
