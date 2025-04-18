@@ -22,10 +22,4 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-add_subdirectory(app)
-add_subdirectory(utils)
-add_subdirectory(tests)
-add_subdirectory(tokenizer)
-add_subdirectory(rpn-converter)
-add_subdirectory(rpn-evaluator)
-add_subdirectory(controller)
+add_subdirectory(math-evaluator-controller)

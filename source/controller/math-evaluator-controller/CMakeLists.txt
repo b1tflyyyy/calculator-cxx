@@ -22,10 +22,20 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-add_subdirectory(app)
-add_subdirectory(utils)
-add_subdirectory(tests)
-add_subdirectory(tokenizer)
-add_subdirectory(rpn-converter)
-add_subdirectory(rpn-evaluator)
-add_subdirectory(controller)
+set(LIB_NAME math-evaluator-controller_lib)
+
+set(SOURCES math-evaluator-controller.cpp)
+set(HEADERS math-evaluator-controller.hpp)
+
+add_library(${LIB_NAME} STATIC ${SOURCES} ${HEADERS})
+enable_qt_autogen(${LIB_NAME})
+
+target_link_libraries(${LIB_NAME} PUBLIC 
+    qt6_lib
+    rpn-converter_lib
+    rpn-evaluator_lib
+    tokenizer_lib
+    logger_lib
+)
+
+target_include_directories(${LIB_NAME} PUBLIC ./)

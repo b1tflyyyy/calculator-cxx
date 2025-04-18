@@ -20,37 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#pragma once
 
-#include <QQmlContext>
+#include <QObject>
 
-#include <logger.hpp>
-#include <qml-hash-map.hpp>
+#include <tokenizer.hpp>
+#include <rpn-converter.hpp>
+#include <rpn-evaluator.hpp>
 
-#include <math-evaluator-controller.hpp>
-
-int main(int argc, char** argv)
+class MathEvaluatorController : public QObject
 {
-    UT_CC_DEFAULT_LOGGER_INIT();
+    Q_OBJECT
+
+public:
+    explicit MathEvaluatorController(QObject* parent = nullptr);
+    ~MathEvaluatorController() noexcept override = default;
+
+    Q_INVOKABLE bool Evaluate(const QString& expression);
+    Q_INVOKABLE double GetResult() const noexcept;
     
-    UT_CC_DEFAULT_LOGGER_INFO(__PRETTY_FUNCTION__);
-    UT_CC_DEFAULT_LOGGER_INFO("---- Initializing application ...");
+    Q_INVOKABLE QString GetErrorMessage() const noexcept;
 
-    QGuiApplication gui_application{ argc, argv };
-    QQmlApplicationEngine application_engine{};
+private:
+    double mResult;
+    QString mErrorMessage;
 
-    MathEvaluatorController math_evaluator_controller{};
-
-    auto* ctx{ application_engine.rootContext() };
-    ctx->setContextProperty(QStringLiteral("mathEvaluatorController"), &math_evaluator_controller);
-
-    qmlRegisterType<Utils::QmlHashMap>("QmlHashMap", 1, 0, "HashMap");
-    
-    UT_CC_DEFAULT_LOGGER_INFO("---- Application engine loading MainWindow.qml ...");
-    
-    const QUrl url{ QStringLiteral("qrc:/main-window/MainWindow.qml") };
-    application_engine.load(url);
-
-    return QGuiApplication::exec();
-}
+    Tokenizer mTokenizer;
+    RPNConverter mRPNConverter;
+};

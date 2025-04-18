@@ -20,37 +20,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include "math-evaluator-controller.hpp"
 
-#include <QQmlContext>
+MathEvaluatorController::MathEvaluatorController(QObject* parent) :
+    QObject{ parent }, mResult{}
+{ }
 
-#include <logger.hpp>
-#include <qml-hash-map.hpp>
-
-#include <math-evaluator-controller.hpp>
-
-int main(int argc, char** argv)
+bool MathEvaluatorController::Evaluate(const QString& expression)
 {
-    UT_CC_DEFAULT_LOGGER_INIT();
+    mTokenizer.Init(expression);
+    mTokenizer.Run();
     
-    UT_CC_DEFAULT_LOGGER_INFO(__PRETTY_FUNCTION__);
-    UT_CC_DEFAULT_LOGGER_INFO("---- Initializing application ...");
+    if (mTokenizer.HasError())
+    {
+        mErrorMessage = mTokenizer.GetErrorMessage();
+        return false;
+    }
 
-    QGuiApplication gui_application{ argc, argv };
-    QQmlApplicationEngine application_engine{};
+    const auto& tokens{ mTokenizer.GetTokens() };
+    const auto rpn_converted_tokens{ mRPNConverter.Convert(tokens) };
 
-    MathEvaluatorController math_evaluator_controller{};
+    if (mRPNConverter.HasError())
+    {
+        mErrorMessage = mRPNConverter.GetErrorMessage();
+        return false;
+    }
 
-    auto* ctx{ application_engine.rootContext() };
-    ctx->setContextProperty(QStringLiteral("mathEvaluatorController"), &math_evaluator_controller);
+    mResult = RPNEvaluator::Evaluate(rpn_converted_tokens);
+    return true;
+}
 
-    qmlRegisterType<Utils::QmlHashMap>("QmlHashMap", 1, 0, "HashMap");
-    
-    UT_CC_DEFAULT_LOGGER_INFO("---- Application engine loading MainWindow.qml ...");
-    
-    const QUrl url{ QStringLiteral("qrc:/main-window/MainWindow.qml") };
-    application_engine.load(url);
+QString MathEvaluatorController::GetErrorMessage() const noexcept
+{
+    return mErrorMessage;
+}
 
-    return QGuiApplication::exec();
+double MathEvaluatorController::GetResult() const noexcept
+{
+    return mResult;
 }

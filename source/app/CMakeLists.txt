@@ -32,4 +32,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     qt6_lib
     logger_lib
     qml_hash_map_lib
+    math-evaluator-controller_lib
 )
