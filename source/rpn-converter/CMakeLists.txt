@@ -22,7 +22,7 @@
 
 cmake_minimum_required(VERSION 3.22)
 
-set(LIB_NAME rpn_converter_lib)
+set(LIB_NAME rpn-converter_lib)
 
 set(SOURCES rpn-converter.cpp)
 set(HEADERS rpn-converter.hpp)
