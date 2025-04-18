@@ -25,6 +25,7 @@ import QtQuick.Controls
 
 import "../calc-keyboard"
 import "../calc-screen"
+import "../calc-result-screen"
 
 Rectangle {
     id: _mainPage
@@ -41,10 +42,8 @@ Rectangle {
             left: parent.left
         }
 
-        height: parent.height * 0.30
+        height: parent.height * 0.15
         width: parent.width
-
-        color: "transparent"
     
         expressionTextSize: 48
 
@@ -53,27 +52,55 @@ Rectangle {
         }
     }
 
-    CalcKeyboard {
-        id: _calcKeyboard
+    CalcResultScreen {
+        id: _calcResultScreen
 
         anchors {
             top: _calcScreen.bottom
+            left: parent.left
         }
 
-        height: parent.height * 0.70
+        height: parent.height * 0.20
+        width: _calcScreen.width
+
+        textColor: "#686738"
+        textSize: 40
+    }
+
+    CalcKeyboard {
+        id: _calcKeyboard
+
+        property bool isCalculated: false
+
+        anchors {
+            top: _calcResultScreen.bottom
+            bottom: parent.bottom
+        }
+
         width: parent.width
 
         onButtonClicked: function (name, value) {
             if (name === "all_clear") {
-                if (_calcScreen.currentExpression !== "") {
+                if (_calcScreen.currentExpression !== "" && !isCalculated) {
                     _calcScreen.deleteLastCharacter()
                 } else {
+                    isCalculated = false
+                    
                     _calcScreen.currentExpression = ""
+                    _calcResultScreen.currentResult = ""
                 }
             } else if (name === "sign") {
                 _calcScreen.changeSign()
             } else if (name === "equal") {
-                // TODO: 
+                if (!mathEvaluatorController.Evaluate(_calcScreen.currentExpression)) {
+                    let msg = mathEvaluatorController.GetErrorMessage()
+                    console.log("Error: ", msg)
+                } else {
+                    _calcResultScreen.currentResult = mathEvaluatorController.GetResult()
+                    
+                    isCalculated = true
+                    _calcKeyboard.showAllClear(true)
+                }
             } else {
                 _calcScreen.addCharacter(value)
             }
