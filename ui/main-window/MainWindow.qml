@@ -34,6 +34,9 @@ Window {
     width: 400
     height: 700
 
+    minimumWidth: 400
+    minimumHeight: 470
+
     MainPage {
         
     }
